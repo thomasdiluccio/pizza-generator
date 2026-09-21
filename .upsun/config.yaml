@@ -48,6 +48,12 @@ services:
   postgresql:
     type: "postgresql:17"
 
+tasks:
+  performance-agent:
+    base: "performance-agent"
+  troubleshooting-agent:
+    base: "troubleshooting-agent"
+
 routes:
   "https://{default}/":
     type: upstream
