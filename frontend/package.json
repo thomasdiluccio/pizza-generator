@@ -1,0 +1,18 @@
+{
+  "name": "pizza-generator-frontend",
+  "version": "1.0.0",
+  "description": "Layer-by-layer pizza builder UI",
+  "private": true,
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

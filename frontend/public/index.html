@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pizza Generator</title>
+<meta name="description" content="Build a pizza one layer at a time, then let the oven judge you.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">🍕</span>
+    <div>
+      <h1>Pizza Generator</h1>
+      <p>Layer by layer. No shortcuts.</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="surprise" class="btn btn-ghost" type="button">Surprise me</button>
+    <button id="reset" class="btn btn-ghost" type="button">Start over</button>
+  </div>
+</header>
+
+<main class="stage">
+  <section class="pizza-panel" aria-label="Your pizza so far">
+    <div class="pizza-frame">
+      <div id="pizza" class="pizza" role="img" aria-label="An empty pizza peel">
+        <div class="peel"></div>
+      </div>
+      <div id="oven-glow" class="oven-glow" aria-hidden="true"></div>
+    </div>
+
+    <ol id="stack" class="stack" aria-label="Layers added"></ol>
+
+    <div class="tally">
+      <div>
+        <span class="tally-label">Running total</span>
+        <span id="total" class="tally-value">€0.00</span>
+      </div>
+      <div>
+        <span class="tally-label">Layers</span>
+        <span id="layer-count" class="tally-value">0 / 5</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="builder" aria-label="Pizza builder">
+    <div id="steps" class="steps" role="tablist" aria-label="Build steps"></div>
+
+    <div id="step-panel" class="step-panel">
+      <header class="step-head">
+        <h2 id="step-title">Base</h2>
+        <p id="step-prompt">Every pizza starts somewhere.</p>
+        <p id="step-rule" class="step-rule"></p>
+      </header>
+      <div id="options" class="options"></div>
+    </div>
+
+    <footer class="builder-foot">
+      <label class="chef">
+        <span>Chef</span>
+        <input id="chef" type="text" maxlength="40" placeholder="Your name" autocomplete="name">
+      </label>
+      <div class="nav">
+        <button id="prev" class="btn btn-ghost" type="button">Back</button>
+        <button id="next" class="btn btn-primary" type="button">Next layer</button>
+        <button id="bake" class="btn btn-bake" type="button" hidden>Bake it 🔥</button>
+      </div>
+    </footer>
+
+    <p id="issues" class="issues" role="alert" hidden></p>
+  </section>
+</main>
+
+<section id="result" class="result" hidden aria-live="polite">
+  <div class="result-card">
+    <button id="close-result" class="result-close" type="button" aria-label="Close">×</button>
+    <p class="result-kicker">Out of the oven</p>
+    <h2 id="result-name">—</h2>
+    <p id="result-chef" class="result-chef"></p>
+    <div class="result-score">
+      <div class="score-ring"><span id="result-score">0</span></div>
+      <div>
+        <p id="result-grade" class="result-grade"></p>
+        <ul id="result-notes" class="result-notes"></ul>
+      </div>
+    </div>
+    <dl class="result-meta">
+      <div><dt>Total</dt><dd id="result-total">—</dd></div>
+      <div><dt>Oven</dt><dd id="result-oven">—</dd></div>
+      <div><dt>After the bake</dt><dd id="result-after">—</dd></div>
+    </dl>
+    <button id="again" class="btn btn-primary" type="button">Build another</button>
+  </div>
+</section>
+
+<section class="recent" aria-label="Recently baked">
+  <h2>Recently baked</h2>
+  <ul id="recent-list" class="recent-list"><li class="recent-empty">Nothing in the oven yet.</li></ul>
+</section>
+
+<footer class="footsy">
+  <span id="backend-status">checking oven…</span>
+  <span>PHP API + Node front end · a demo you can actually eat with your eyes</span>
+</footer>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

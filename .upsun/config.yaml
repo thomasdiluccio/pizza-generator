@@ -1,0 +1,65 @@
+# Pizza Generator — two apps, one Upsun project.
+#   frontend : Node 22 + Express, serves the UI and proxies /api to the PHP app
+#   api      : PHP 8.4, JSON API, PostgreSQL for baked pizzas
+applications:
+  frontend:
+    source:
+      root: "frontend"
+    type: "nodejs:22"
+    relationships:
+      api: "api:http"
+    variables:
+      env:
+        NODE_ENV: "production"
+    hooks:
+      build: |
+        set -eu
+        npm ci --omit=dev
+    web:
+      commands:
+        start: "node server.js"
+      upstream:
+        socket_family: tcp
+      locations:
+        "/":
+          passthru: true
+
+  api:
+    source:
+      root: "api"
+    type: "php:8.4"
+    dependencies:
+      php:
+        composer/composer: "^2"
+    relationships:
+      postgresql: "postgresql:postgresql"
+    hooks:
+      build: |
+        set -eu
+        composer install --no-dev --optimize-autoloader --no-interaction
+    web:
+      locations:
+        "/":
+          root: ""
+          passthru: "/index.php"
+          index: ["index.php"]
+
+services:
+  postgresql:
+    type: "postgresql:17"
+
+routes:
+  "https://{default}/":
+    type: upstream
+    upstream: "frontend:http"
+    cache:
+      enabled: false
+  # Handy for demos: hit the JSON API directly.
+  "https://api.{default}/":
+    type: upstream
+    upstream: "api:http"
+    cache:
+      enabled: false
+  "http://{default}/":
+    type: redirect
+    to: "https://{default}/"

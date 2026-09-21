@@ -1,0 +1,19 @@
+{
+    "name": "upsun/pizza-generator-api",
+    "description": "Layer-by-layer pizza builder API",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pizza\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
