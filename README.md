@@ -13,7 +13,7 @@ Two apps, one repo:
 
 The front end is plain ES modules and CSS — no build step, no bundler, nothing to wait for.
 
-## Run it locally
+## Run it locally - test
 
 ```bash
 cd frontend && npm install && cd ..
